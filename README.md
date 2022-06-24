@@ -1,26 +1,27 @@
 # Rocket-Elevators-Golang-Controller
-This is the template to use for the golang commercial controller. You will find the classes that should be used along with some methods described in the requirements. The necessary files to run some tests are also included. 
 
-### Installation
+## Description
+This programs creates columns, elevators, floorbuttons and call buttons.
 
-With golang installed on your computer, all you need to do is initialize the module:
+Under them we wrote an elaborate algorithm to call an elevator and chose the best column/elevator to respond the call, we also track those calls and put them on a list so the elevator knows where it's going and where it went.
 
-`go mod init Rocket-Elevators-Commercial-Controller`
+The scenarios and test help us make sure that our code is exellent and good to go.
 
-The code to run the scenarios is included, and can be executed with:
+## Dependencies
 
-`go run . <SCENARIO-NUMBER>`
+To be able to try the program, you need ..
 
-### Running the tests
+- VS Code
+- Download everything for Golang
+- All code files
+- Scenario and test files
 
-To launch the tests:
 
-`go test`
+## Usage
 
-With a fully completed project, you should get an output like:
+To run the program you need to open terminal, if you have Golang installed run "go mod init Rocket-Elevators-Commercial-Controller" and to run the test simply type GO TEST
 
-![Screenshot from 2021-06-15 15-25-10](https://user-images.githubusercontent.com/28630658/122111573-e6ea7380-cded-11eb-95e3-95e0096a1b3a.png)
+## Example
 
-The test and scenarios files can be left in your final project. The grader will run tests similar to the ones provided.
-
-Of course, make sure to edit this Readme file to describe your own project!
+If you call an elevator, depending on where u want to go it will chose the appropriate column and elevator.
+If you choose the 30th floor and the column 4 serves the floor it will find the closest elevator towards you.

@@ -240,31 +240,28 @@ DEFINE Elevator USING _id AND _status AND _amountOfFloors AND _currentFloor
 
 
     '//---------------------------------Methods--------------------------------------------//
-    SEQUENCE move  
-        WHILE THIS requestList IS NOT empty
-            SET destination TO first element of THIS requestList
-            SET THIS status TO moving
-            IF THIS currentFloor IS LESS THAN destination THEN
-                SET THIS direction TO up
-                CALL THIS sortFloorList
-                WHILE THIS currentFloor IS LESS THAN destination
-                    INCREMENT THIS currentFloor
-                    SET THIS screenDisplay TO THIS currentFloor
+    SEQUENCE move
+                WHILE THIS floorRequestsList IS NOT empty
+                    SET THIS status TO moving
+                    CALL THIS sortFloorList
+                    SET destination TO first element of THIS floorRequestsList
+                    IF THIS direction EQUALS up
+                        WHILE currentFloor IS LESS THAN destination
+                            INCREMENT THIS currentFloor
+                        ENDWHILE
+                    ELSE IF THIS direction EQUALS down
+                        WHILE currentFloor IS GREATER THAN destination
+                            DECREMENT THIS currentFloor
+                        ENDWHILE
+                    ENDIF
+                    SET THIS status TO stopped
+                    CALL THIS operateDoors
+                    REMOVE first element of THIS floorRequestsList
+                    ADD destination TO THIS completedRequestsList
                 ENDWHILE
-            ELSE IF THIS currentFloor IS GREATER THAN destination THEN
-                SET THIS direction TO down
-                CALL THIS sortFloorList
-                WHILE THIS currentFloor IS LESS THAN destination
-                    DECREMENT THIS currentFloor
-                    SET THIS screenDisplay TO THIS currentFloor
-                ENDWHILE
-            ENDIF
-            SET THIS status TO stopped
-            CALL THIS operateDoors
-            REMOVE first element OF THIS requestList
-        ENDWHILE
-        SET THIS status TO idle
-    ENDSEQUENCE
+                SET THIS STATUS to idle
+                SET THIS direction to empty
+            ENDSEQUENCE
 
     SEQUENCE sortFloorList
         IF THIS direction EQUALS up THEN
